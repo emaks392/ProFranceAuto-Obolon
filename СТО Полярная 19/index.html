@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro France Auto - Професійний автосервіс</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="photo_2025-02-24_21-37-50.jpg" type="image/png">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #1e3c72;
+      color: #fff;
+      text-align: center;
+      padding: 1.5em;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    section {
+      padding: 20px;
+      background: #fff;
+      margin: 20px auto;
+      width: 85%;
+      max-width: 1200px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #1e3c72;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      background: #f1f1f1;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: #1e3c72;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #2a4a7b;
+    }
+
+    .cart {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: yellow;
+      color: black;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .cart-list {
+      background: #fff;
+      color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    footer {
+      background: #1e3c72;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    #map {
+      height: 300px;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .reviews {
+      margin-top: 40px;
+    }
+
+    .review {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .stars {
+      color: gold;
+    }
+
+    .call-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: orange;
+      color: black;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      animation: blink 1s infinite alternate;
+    }
+
+    .promo-banner {
+      background-color: yellow;
+      color: black;
+      text-align: center;
+      font-size: 1.2em;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      text-transform: uppercase;
+    }
+
+    .promo-banner .close-banner {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    header {
+      margin-top: 60px;
+    }
+
+    .call-button:hover {
+      background-color: orange;
+      animation: none;
+    }
+
+    @keyframes blink {
+      0% {
+        background-color: orange;
+        color: black;
+      }
+
+      50% {
+        background-color: yellow;
+        color: black;
+      }
+
+      100% {
+        background-color: orange;
+        color: black;
+      }
+    }
+
+    .time-table {
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      header p {
+        font-size: 1em;
+      }
+
+      section {
+        width: 90%;
+      }
+
+      .cart {
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+      }
+
+      .modal-content {
+        width: 80%;
+        padding: 20px;
+      }
+
+      .cart-list {
+        max-height: 200px;
+      }
+
+      .review {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .reviews .review {
+        margin: 10px 0;
+      }
+
+      footer p {
+        font-size: 0.9em;
+      }
+
+      #map {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1em;
+        position: relative;
+        z-index: 500;
+        padding-top: 60px;
+      }
+
+      header h1 {
+        font-size: 1.7em;
+      }
+
+      header p {
+        font-size: 0.9em;
+      }
+
+      .call-button {
+        font-size: 0.9em;
+        padding: 8px 12px;
+      }
+
+      section {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .cart-list {
+        max-height: 150px;
+      }
+
+      .modal-content {
+        width: 90%;
+        padding: 15px;
+      }
+
+      footer p {
+        font-size: 0.8em;
+      }
+    }
+    /* Банер акцій для десктопу */
+.promo-banner-desktop {
+  background-color: yellow;
+  color: black;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+}
+
+/* Для мобильных устройств акційний банер в секции услуг */
+.promo-banner-mobile {
+  background-color: yellow;
+  color: black;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 5px;
+  margin-bottom: 10px; /* немного отступа для удобства */
+  display: none; /* по умолчанию скрыт */
+  text-transform: uppercase;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+<body>
+
+  <!-- Акційний банер для десктопної версії -->
+  
+
+  <header>
+    <h1>Pro France Auto</h1>
+    <p>Надійний автосервіс на Оболоні</p>
+    <button class="call-button" onclick="openModal()">📞 Замовити дзвінок</button>
+  </header>
+
+  <section id="services">
+    <h2>Наші послуги</h2>
+
+    <!-- Акційний банер для мобільної версії -->
+    <div class="promo-banner-mobile">
+      <p>🎉 Акція! 15% знижки на перший ремонт! 🎉</p>
+    </div>
+
+    <div class="cart">
+      <p>🛒 Кошик (<span id="cart-count">0</span>)</p>
+      <div class="cart-list" id="cart-list"></div>
+      <button onclick="openCheckoutModal()">Ознайомитись з замовленням</button>
+    </div>
+    <ul>
+      <li>Комп’ютерна діагностика - від 300 грн <button
+          onclick="addToCart('Комп’ютерна діагностика', 300)">Додати</button></li>
+      <li>Перевірка ходової частини - від 300 грн <button
+          onclick="addToCart('Перевірка ходової частини', 300)">Додати</button></li>
+      <li>Ремонт підвіски - від 1,150 грн <button onclick="addToCart('Ремонт підвіски', 1150)">Додати</button></li>
+      <li>Ремонт трансмісії - від 10,300 грн <button onclick="addToCart('Ремонт трансмісії', 10300)">Додати</button>
+      </li>
+      <li>Заміна фільтрів - від 800 грн <button onclick="addToCart('Заміна фільтрів', 800)">Додати</button></li>
+      <li>Ремонт двигуна - від 3,000 грн <button onclick="addToCart('Заміна масла', 3000)">Додати</button></li>
+      <li>Заміна гальмівної рідини - від 400 грн <button onclick="addToCart('Заміна масла', 400)">Додати</button></li>
+      <li>Заміна гальмівної рейки - від 4,000 грн <button onclick="addToCart('Заміна масла', 4000)">Додати</button></li>
+      <li>Ремонт коробки автомат - від 15,000 грн <button onclick="addToCart('Заміна масла', 15000)">Додати</button></li>
+      <li>Ремонт механічної коробки передач - від 2,000 грн <button onclick="addToCart('Заміна масла', 2000)">Додати</button></li>
+    </ul>
+  </section>
+
+  <!-- Остальной код страницы... -->
+
+</body>
+
+
+  <section id="specialist">
+    <h2>Наш спеціаліст</h2>
+    <p><strong>Віталій</strong> – ваш експерт з ремонту автомобілів!</p>
+    <p>📞 050 331 1390</p>
+    <p>Досвід роботи понад 20 років</p>
+  </section>
+  <section id="location">
+    <h2>Де нас знайти</h2>
+    <p>м. Київ, Оболонь, вул. Полярна 19, бокс 3</p>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2536.8372066503257!2d30.46714967640792!3d50.51859577160524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4d263bef0f3c7%3A0x3812f44efd37120!2sPolyarna%20St%2C%2019%2C%20Kyiv%2C%20Ukraine%2C%2002000!5e0!3m2!1sen!2suk!4v1740327273766!5m2!1sen!2suk"
+      width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  
+  
+  </section>
+  
+  <section class="time-table" id="schedule">
+    <h2>Графік роботи</h2>
+    <p>ПН-ПТ: 10:00 - 18:00</p>
+    <p>СБ: 10:00 - 15:00</p>
+    <p>НД: Вихідний</p>
+  </section>
+  
+  <section id="about">
+    <h2>Про нас</h2>
+    <p>Pro France Auto – це автосервіс, який став справжнім символом надійності та професіоналізму в обслуговуванні
+      автомобілів. Більше 20 років ми спеціалізуємося на ремонті французьких автомобілів, і наші майстри володіють
+      безцінним
+      досвідом та сертифікацією, що дозволяє нам забезпечити найвищу якість послуг. З невеликого гаража ми виросли в
+      велику
+      автомайстерню, здатну приймати будь-які складні завдання. Проте ми не забуваємо про свою історію та завжди
+      залишаємося
+      орієнтованими на комфорт наших клієнтів.</p>
+  </section>
+  
+  <section class="reviews">
+    <h2>Відгуки</h2>
+    <div class="review">
+      <p>Максим</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Дуже задоволений роботою, персоналом і цінами!</p>
+    </div>
+    <div class="review">
+      <p>Олександр</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Хороший сервіс, приємна ціна.</p>
+    </div>
+    <div class="review">
+      <p>Ірина</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Чудове обслуговування та професіоналізм!</p>
+    </div>
+    <div class="review">
+      <p>Дмитро</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Ремонт зробили швидко та якісно!</p>
+    </div>
+  </section>
+  <div class="modal" id="call-modal">
+    <div class="modal-content">
+      <h2>Замовити дзвінок</h2>
+      <p>Майстер перезвонить вам через 10 хвилин.</p>
+      <input type="text" placeholder="Ім'я" id="name">
+      <input type="text" placeholder="Номер телефону" id="phone">
+      <button onclick="closeModal()">Відправити</button>
+    </div>
+  </div>
+
+  <div class="modal" id="checkout-modal">
+    <div class="modal-content">
+      <h2>Фінальна сума</h2>
+      <p>Загальна сума: від <span id="total-amount">0</span> грн</p>
+      <p>🎉 Знижка 15% на перший ремонт застосована!</p>
+      <button onclick="closeCheckoutModal()">Закрити</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Тел: 0503311390</p>
+    <p>Email: profranceauto@gmail.com</p>
+    <p>м. Київ, Оболонь, вул. Полярна 19, бокс 3</p>
+    <p>© 2025 Pro France Auto. Усі права захищені.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+    let firstRepair = true;
+
+    function addToCart(service, price) {
+      cart.push({ service, price });
+      document.getElementById('cart-count').innerText = cart.length;
+      updateCartList();
+    }
+
+    function updateCartList() {
+      let cartList = document.getElementById('cart-list');
+      cartList.innerHTML = '';
+      cart.forEach((item, index) => {
+        let li = document.createElement('div');
+        li.innerHTML = `${item.service} - ${item.price} грн <button onclick="removeFromCart(${index})">Видалити</button>`;
+        cartList.appendChild(li);
+      });
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      document.getElementById('cart-count').innerText = cart.length;
+      updateCartList();
+    }
+
+    function openCheckoutModal() {
+      let totalAmount = cart.reduce((total, item) => total + item.price, 0);
+
+      if (firstRepair && totalAmount > 0) {
+        totalAmount *= 0.85; // 15% знижка
+        firstRepair = false;
+      }
+
+      document.getElementById('total-amount').innerText = totalAmount.toFixed(2);
+      document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').style.display = 'none';
+    }
+
+    function openModal() {
+      document.getElementById('call-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('call-modal').style.display = 'none';
+      alert('Ваш запит прийнято! Майстер зателефонує вам через 10 хвилин.');
+    }
+
+    document.querySelector('.close-banner').addEventListener('click', function () {
+      document.querySelector('.promo-banner').style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>
